@@ -1,0 +1,29 @@
+﻿<Window x:Class="test_wpf.Add_Wpf"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:test_wpf"
+        mc:Ignorable="d"
+        Title="Add_Wpf" Height="100" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Введите Фамилию:" TextAlignment="Center"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Введите номер:" TextAlignment="Center"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Введите Email:" TextAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="Name_TextBox" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="Number_TextBox" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Name="Email_TextBox" TextWrapping="Wrap"/>
+        <Button Grid.Row="1" Grid.Column="3" Name="Accept_Button" Content="Подтвердить" Click="Accept_Button_Click"/>
+
+    </Grid>
+</Window>
