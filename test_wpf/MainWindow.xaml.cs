@@ -43,69 +43,71 @@ namespace test_wpf
             User_List.Clear();
             List1.Items.Clear();
 
-            string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Артём\Source\Repos\test_wpf\test_wpf\Database.mdf;Integrated Security=True";
-            //string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\Database.mdf;Integrated Security=True";
-
-            sqlConnection = new SqlConnection(connectionstring);
- 
-            sqlConnection.Open();
-
-
-            //для чтения данных из БД раскомментить следующую строку
+            //для работы с БД раскомментить
+            //DB_Connect();
             //BD_Read();
-           XML_Read();
+            XML_Read();
         }
 
-        void BD_Read()
-        {
-            
+        /* void DB_Connect()
+         {
+             //для подключения к бд надо заменить путь "C:\Users\Артём\Source\Repos\test_wpf\test_wpf\Database.mdf" на новый путь
+             string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Артём\Source\Repos\test_wpf\test_wpf\Database.mdf;Integrated Security=True";
 
-            SqlDataReader sqlReader = null;
+             sqlConnection = new SqlConnection(connectionstring);
 
-            SqlCommand command = new SqlCommand("SELECT * FROM [User_DB]", sqlConnection);
+             sqlConnection.Open();
 
-            try
-            {
-                sqlReader = command.ExecuteReader();
+         }
 
-                while( sqlReader.Read())
-                {
-                    new_User.Name = Convert.ToString(sqlReader["Name_t"]);
-                    new_User.Number = Convert.ToString(sqlReader["Number_t"]);
-                    new_User.Email = Convert.ToString(sqlReader["Email_t"]);
-                    User_List.Add(new_User);
-                    //List1.Items.Add("Имя: " + new_User.Name + "; Номер: " + new_User.Number + "; Почта: " + new_User.Email);
-                    List1.Items.Add("Фамилия: " + new_User.Name);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                if (sqlReader != null)
-                    sqlReader.Close();
-            }
-        }
+         void BD_Read()
+         {
+             SqlDataReader sqlReader = null;
 
-        void BD_Save()
-        {
-            SqlCommand command0 = new SqlCommand("DELETE FROM [User_DB]", sqlConnection);
+             SqlCommand command = new SqlCommand("SELECT * FROM [User_DB]", sqlConnection);
 
-            command0.ExecuteNonQuery();
+             try
+             {
+                 sqlReader = command.ExecuteReader();
 
-            foreach (User a in User_List)
-            {
-                SqlCommand command = new SqlCommand("INSERT INTO [User_DB] (Name_t, Number_t, Email_t) VALUES(@_Name, @_Number, @_Email)", sqlConnection);
+                 while( sqlReader.Read())
+                 {
+                     new_User.Name = Convert.ToString(sqlReader["Name_t"]);
+                     new_User.Number = Convert.ToString(sqlReader["Number_t"]);
+                     new_User.Email = Convert.ToString(sqlReader["Email_t"]);
+                     User_List.Add(new_User);
+                     //List1.Items.Add("Имя: " + new_User.Name + "; Номер: " + new_User.Number + "; Почта: " + new_User.Email);
+                     List1.Items.Add("Фамилия: " + new_User.Name);
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             finally
+             {
+                 if (sqlReader != null)
+                     sqlReader.Close();
+             }
+         }
 
-                command.Parameters.AddWithValue("_Name", a.Name);
-                command.Parameters.AddWithValue("_Number", a.Number);
-                command.Parameters.AddWithValue("_Email", a.Email);
+         void BD_Save()
+         {
+             SqlCommand command0 = new SqlCommand("DELETE FROM [User_DB]", sqlConnection);
 
-                command.ExecuteNonQuery();
-            }
-        }
+             command0.ExecuteNonQuery();
+
+             foreach (User a in User_List)
+             {
+                 SqlCommand command = new SqlCommand("INSERT INTO [User_DB] (Name_t, Number_t, Email_t) VALUES(@_Name, @_Number, @_Email)", sqlConnection);
+
+                 command.Parameters.AddWithValue("_Name", a.Name);
+                 command.Parameters.AddWithValue("_Number", a.Number);
+                 command.Parameters.AddWithValue("_Email", a.Email);
+
+                 command.ExecuteNonQuery();
+             }
+         }*/
 
         void XML_Read()
         {
@@ -253,8 +255,8 @@ namespace test_wpf
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //для записи данных в БД раскомментить следующую строку
-            BD_Save();
-            //XML_Save();
+            //BD_Save();
+            XML_Save();
             if (sqlConnection != null && sqlConnection.State != ConnectionState.Closed)
                 sqlConnection.Close();
         }
