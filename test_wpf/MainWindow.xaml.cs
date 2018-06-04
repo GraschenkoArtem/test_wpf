@@ -44,14 +44,16 @@ namespace test_wpf
             List1.Items.Clear();
 
             string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Артём\Source\Repos\test_wpf\test_wpf\Database.mdf;Integrated Security=True";
+            //string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\Database.mdf;Integrated Security=True";
 
             sqlConnection = new SqlConnection(connectionstring);
-
+ 
             sqlConnection.Open();
 
+
             //для чтения данных из БД раскомментить следующую строку
-            // BD_Read();
-            XML_Read();
+            //BD_Read();
+           XML_Read();
         }
 
         void BD_Read()
@@ -137,7 +139,10 @@ namespace test_wpf
                     }
                 }
             }
-            catch { }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
 
 
@@ -184,7 +189,10 @@ namespace test_wpf
 
                 writer.Close();
             }
-            catch { }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         
         private void Add_Button_Click(object sender, RoutedEventArgs e)
@@ -245,8 +253,8 @@ namespace test_wpf
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //для записи данных в БД раскомментить следующую строку
-            // BD_Save();
-            XML_Save();
+            BD_Save();
+            //XML_Save();
             if (sqlConnection != null && sqlConnection.State != ConnectionState.Closed)
                 sqlConnection.Close();
         }
