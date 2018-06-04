@@ -43,7 +43,7 @@ namespace test_wpf
             User_List.Clear();
             List1.Items.Clear();
 
-            //для работы с БД раскомментить
+            //для работы с БД раскомментить строки 47, 48, 52-109, 256
             //DB_Connect();
             //BD_Read();
             XML_Read();
